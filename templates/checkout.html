@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout - E-Commerce Store{% endblock %}
+
+{% block content %}
+<h2>Checkout</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Shipping Information</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('place_order') }}">
+                    <div class="mb-3">
+                        <label for="shipping_address" class="form-label">Shipping Address</label>
+                        <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" required placeholder="Enter your complete address"></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                    
+                    <h5>Payment Method</h5>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
+                            <label class="form-check-label" for="cod">
+                                Cash on Delivery (COD)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Order Summary</h5>
+            </div>
+            <div class="card-body">
+                {% for item in cart_items %}
+                <div class="d-flex justify-content-between mb-2">
+                    <span>{{ item.product.name }} ({{ item.quantity }}x)</span>
+                    <span>₹{{ "%.2f"|format(item.subtotal) }}</span>
+                </div>
+                {% endfor %}
+                
+                <hr>
+                
+                <div class="d-flex justify-content-between">
+                    <strong>Total:</strong>
+                    <strong>₹{{ "%.2f"|format(total) }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

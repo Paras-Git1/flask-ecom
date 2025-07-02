@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - E-Commerce Store{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img id="mainImage" src="{{ product.image1 }}" class="main-product-image" alt="{{ product.name }}">
+        
+        <div class="image-gallery mt-3">
+            <img src="{{ product.image1 }}" class="gallery-thumbnail active" onclick="changeMainImage('{{ product.image1 }}')" alt="Image 1">
+            {% if product.image2 %}
+                <img src="{{ product.image2 }}" class="gallery-thumbnail" onclick="changeMainImage('{{ product.image2 }}')" alt="Image 2">
+            {% endif %}
+            {% if product.image3 %}
+                <img src="{{ product.image3 }}" class="gallery-thumbnail" onclick="changeMainImage('{{ product.image3 }}')" alt="Image 3">
+            {% endif %}
+            {% if product.image4 %}
+                <img src="{{ product.image4 }}" class="gallery-thumbnail" onclick="changeMainImage('{{ product.image4 }}')" alt="Image 4">
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <h1>{{ product.name }}</h1>
+        <p class="lead">₹{{ "%.2f"|format(product.price) }}</p>
+        
+        <div class="mb-3">
+            <span class="badge bg-secondary">Stock: {{ product.stock }}</span>
+        </div>
+        
+        <p>{{ product.description }}</p>
+        
+        {% if product.stock > 0 %}
+            <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </a>
+        {% else %}
+            <button class="btn btn-secondary btn-lg" disabled>
+                Out of Stock
+            </button>
+        {% endif %}
+        
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary btn-lg ms-2">
+            <i class="fas fa-arrow-left me-2"></i>Back to Products
+        </a>
+    </div>
+</div>
+{% endblock %}

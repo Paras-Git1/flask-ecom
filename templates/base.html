@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Commerce Store{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --footer-bg: #6c757d;
+            --footer-text: #ffffff;
+            --footer-link-color: #e9ecef;
+            --footer-border: #5a6268;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 12px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .cart-badge {
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+        
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .status-placed { background-color: #3498db; color: white; }
+        .status-dispatched { background-color: #f39c12; color: white; }
+        .status-out-for-delivery { background-color: #9b59b6; color: white; }
+        .status-delivered { background-color: #27ae60; color: white; }
+        .status-cancelled { background-color: #e74c3c; color: white; }
+        
+        .image-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        
+        .gallery-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .gallery-thumbnail:hover,
+        .gallery-thumbnail.active {
+            border-color: var(--secondary-color);
+        }
+        
+        .main-product-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        /* New Footer Styles */
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 3rem 0 1rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--footer-border);
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.8), rgba(52, 58, 64, 0.8));
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h5 {
+            color: var(--footer-text);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--footer-link-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .region-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .region-select {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--footer-border);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .region-select option {
+            background-color: var(--footer-bg);
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--footer-link-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-bottom-links a {
+            color: var(--footer-link-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .footer-columns {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .footer-columns {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-btn {
+                width: 100%;
+            }
+            
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-columns {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .footer {
+                padding: 2rem 0 1rem 0;
+            }
+            
+            .newsletter-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-shopping-bag me-2"></i>E-Store
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="{{ url_for('cart') }}">
+                            <i class="fas fa-shopping-cart"></i>
+                            {% if cart_count > 0 %}
+                                <span class="cart-badge">{{ cart_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    
+                    {% if session.user_id %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user"></i> {{ session.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('my_orders') }}">My Orders</a></li>
+                                {% if session.is_admin %}
+                                    <li><a class="dropdown-item" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{% if category == 'error' %}danger{% elif category == 'success' %}success{% elif category == 'info' %}info{% else %}warning{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Main Content -->
+    <main class="container mt-4">
+        {% block content %}
+        <!-- Demo content for preview -->
+        <div class="row">
+            <div class="col-12">
+                <h1>Welcome to E-Store</h1>
+                <p>This is a demo page to showcase the new footer design. The footer has been updated to match your requirements with a grey color scheme and responsive design.</p>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+    
+    <!-- New Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">                
+                <!-- Footer Columns -->
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <div class="social-links">
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h5>E-Store Pages</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Cart</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h5>Registration & Login</h5>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Sign-Up</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h5>Returns & Damages</h5>
+                        <ul>
+                            <li><a href="#">Know More</a></li>
+                            <li><a href="#">Return Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h5>Choose region</h5>
+                        <ul>
+                            <li><a href="#">India</a></li>
+                            <li><a href="#">Japan</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <a href="#">Website Terms</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">No Data selling Policy</a>
+                    <a href="#">Accessibility Statement</a>
+                    <a href="#">Transparency in Supply Chain Act</a>
+                    <a href="#">Eligible Code of Conduct</a>
+                    <a href="#">Marketing at E-Store</a>
+                </div>
+                <p>&copy; 2025 E-Store, LLC. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Image gallery functionality
+        function changeMainImage(src) {
+            document.getElementById('mainImage').src = src;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            const checkbox = document.getElementById('ageConfirm').checked;
+            
+            if (!checkbox) {
+                alert('Please confirm that you are at least 18 years of age.');
+                return;
+            }
+            
+            if (email) {
+                alert('Thank you for subscribing to our newsletter!');
+                this.querySelector('.newsletter-input').value = '';
+                document.getElementById('ageConfirm').checked = false;
+            }
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

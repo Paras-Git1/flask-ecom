@@ -1,0 +1,28 @@
+# Core Flask Dependencies
+Flask==2.3.3
+Flask-SQLAlchemy
+
+Werkzeug==2.3.7
+
+# Security and Authentication
+Flask-Login
+Flask-WTF
+WTForms
+
+# Database
+SQLAlchemy==2.0.23
+
+# Optional but Recommended Dependencies
+Flask-Migrate          # Database migrations
+Flask-Mail             # Email functionality
+Flask-Admin            # Admin interface
+Flask-Limiter          # Rate limiting
+python-dotenv          # Environment variables
+
+# Development Dependencies
+Flask-DebugToolbar    # Development debugging
+
+# Production Dependencies (uncomment for production)
+# gunicorn==21.2.0             # WSGI server for production
+# psycopg2-binary==2.9.9       # PostgreSQL adapter
+# redis==5.0.1                 # Redis for sessions/caching
