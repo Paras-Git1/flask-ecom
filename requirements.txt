@@ -1,7 +1,7 @@
 # Core Flask Dependencies
 Flask==2.3.3
 Flask-SQLAlchemy
-
+gunicorn
 Werkzeug==2.3.7
 
 # Security and Authentication
