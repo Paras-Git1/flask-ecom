@@ -46,7 +46,7 @@ A full-featured e-commerce web application built with Flask, SQLAlchemy, and mod
 
 Before running this application, make sure you have the following installed:
 
-- Python 3.7 or higher
+- Python 3.7 or higher (Avoid using Python 3.13 due to compatibility issues with SQLAlchemy)
 - pip (Python package installer)
 
 ## 🚀 Installation & Setup
@@ -54,7 +54,7 @@ Before running this application, make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/flask-ecommerce-app.git
+git clone https://github.com/Paras-Git1/flask-ecommerce-app.git
 cd flask-ecommerce-app
 ```
 
@@ -117,11 +117,11 @@ The application creates a default admin account on first run:
 flask-ecommerce-app/
 │
 ├── app.py                  # Main application file
-├── ecommerce.db           # SQLite database (created automatically)
-├── requirements.txt       # Python dependencies
-├── templates/             # HTML templates
-│   ├── base.html         # Base template
-│   ├── home.html         # Homepage
+├── ecommerce.db            # SQLite database (created automatically)
+├── requirements.txt        # Python dependencies
+├── templates/              # HTML templates
+│   ├── base.html           # Base template
+│   ├── home.html           # Homepage
 │   ├── product_detail.html
 │   ├── cart.html
 │   ├── checkout.html
@@ -130,8 +130,6 @@ flask-ecommerce-app/
 │   ├── admin_dashboard.html
 │   └── ...
 ├── static/               # Static files (CSS, JS, images)
-│   ├── css/
-│   ├── js/
 │   └── images/
 └── README.md
 ```
@@ -227,7 +225,7 @@ For production deployment, consider:
 4. **Enable HTTPS**
 5. **Set up proper logging**
 
-Example with Gunicorn:
+Example with Gunicorn (for production deployment):
 
 ```bash
 pip install gunicorn
@@ -250,9 +248,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/yourusername/flask-ecommerce-app/issues) page
+1. Check the [Issues](https://github.com/Paras-Git1/flask-ecommerce-app/issues) page
 2. Create a new issue with detailed information
-3. Contact the maintainers
+3. Contact me at Paraschaudhary10j@gmail.com for further help
 
 ## 🙏 Acknowledgments
 
