@@ -18,7 +18,7 @@ A full-featured e-commerce web application built with Flask, SQLAlchemy, and mod
 - **Shopping Cart**: Add, remove, and update quantities
 - **Responsive Design**: Works on desktop and mobile devices
 
-![Product Detail Page](images/product-detail-screenshot.png)
+![Product Detail Page](images/ProductDetailPage.jpg)
 
 ### 📦 Order Management
 - **Secure Checkout**: Protected checkout process
@@ -32,7 +32,7 @@ A full-featured e-commerce web application built with Flask, SQLAlchemy, and mod
 - **Dashboard**: Overview of products and recent orders
 - **Stock Management**: Track inventory levels
 
-![Admin Dashboard](images/admin-dashboard-screenshot.png)
+![Admin Dashboard](images/AdminPage.jpg)
 
 ## 🛠️ Technology Stack
 
@@ -99,7 +99,7 @@ python app.py
 
 The application will be available at `http://localhost:5000`
 
-![Cart Page](images/cart-screenshot.png)
+![Cart Page](images/CartPage.jpg)
 
 ## 🎯 Default Credentials
 
@@ -172,7 +172,7 @@ app.config['SECRET_KEY'] = 'your-very-secure-secret-key'
 3. **Process Orders**: Update order statuses (placed, processing, shipped, delivered)
 4. **Monitor Dashboard**: View overview of products and recent orders
 
-![Order Status Page](images/order-status-screenshot.png)
+![Order Status Page]()
 
 ## 🌐 API Endpoints
 
