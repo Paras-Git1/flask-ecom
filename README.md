@@ -2,7 +2,7 @@
 
 A full-featured e-commerce web application built with Flask, SQLAlchemy, and modern web technologies. This application provides a complete online shopping experience with user authentication, product management, shopping cart functionality, and order processing.
 
-![App Screenshot](images/Frame239.jpg)
+![App Screenshot](images/HomePage.jpg)
 
 ## ✨ Features
 
