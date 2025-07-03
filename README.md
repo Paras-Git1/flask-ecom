@@ -172,7 +172,7 @@ app.config['SECRET_KEY'] = 'your-very-secure-secret-key'
 3. **Process Orders**: Update order statuses (placed, processing, shipped, delivered)
 4. **Monitor Dashboard**: View overview of products and recent orders
 
-![Order Status Page]()
+![Order Status Page](images/AdminPage.jpg)
 
 ## 🌐 API Endpoints
 
